@@ -1,0 +1,163 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Alex+Brush&display=swap');
+
+/* Theme variables were converted to :root further below for broad compatibility. */
+
+/* Base body styles (converted from Tailwind @apply for tooling compatibility) */
+body {
+  background-color: var(--ivory);
+  color: #111827; /* approximate Tailwind gray-900 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth native anchor scrolling as a helpful fallback */
+html { scroll-behavior: smooth; }
+
+.cinematic-overlay {
+  background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.4) 100%);
+}
+
+.scrapbook-border {
+  border-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect x="0" y="0" width="100" height="100" fill="none" stroke="%23B76E79" stroke-width="2" stroke-dasharray="5,5"/></svg>') 30;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--ivory);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(183,110,121,0.3); /* rose-gold 30% */
+  border-radius: 9999px;
+  transition: background-color 200ms ease;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(183,110,121,0.5); /* rose-gold 50% */
+}
+
+:root {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", serif;
+  --font-handwriting: "Alex Brush", cursive;
+
+  --ivory: #fffaf1;
+  --cream: #fff6ec;
+  --soft-pink: #f8e8e8;
+  --rose-gold: #b76e79;
+  --paper: linear-gradient(180deg, rgba(255,250,245,1) 0%, rgba(255,247,240,1) 100%);
+}
+
+/* Fade-in helper for images */
+.fade-in {
+  opacity: 0;
+  transform: scale(1.02);
+  transition: opacity 600ms ease-out, transform 600ms ease-out;
+}
+.fade-in.loaded {
+  opacity: 1;
+  transform: none;
+}
+
+/* Navbar active underline/glow */
+.nav-active {
+  color: #b76e79;
+}
+.nav-active::after {
+  content: '';
+  display: block;
+  height: 3px;
+  background: linear-gradient(90deg, rgba(183,110,121,0.12), rgba(183,110,121,0.3));
+  border-radius: 99px;
+  margin-top: 6px;
+  box-shadow: 0 6px 18px rgba(183,110,121,0.06);
+}
+
+/* Masonry layout (CSS columns) */
+.masonry {
+  column-count: 3;
+  column-gap: 1rem;
+}
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+}
+/* caption overlay for gallery items */
+.caption-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1rem;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.45) 100%);
+  color: white;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 280ms cubic-bezier(.22,1,.36,1), opacity 220ms ease;
+  display: flex;
+  align-items: flex-end;
+}
+.masonry-item:hover .caption-overlay, .masonry-item:focus-within .caption-overlay {
+  transform: translateY(0%);
+  opacity: 1;
+}
+.caption-overlay.open {
+  transform: translateY(0%);
+  opacity: 1;
+}
+.caption-text { font-size: 0.95rem; line-height: 1.3; }
+@media (max-width: 1024px) {
+  .masonry { column-count: 2; }
+}
+@media (max-width: 640px) {
+  .masonry { column-count: 1; }
+}
+
+@media (min-width: 1400px) {
+  .masonry { column-count: 4; }
+}
+
+/* Respect user preference for reduced motion and reduce animations on low power devices */
+@media (prefers-reduced-motion: reduce) {
+  .fade-in { transition: none !important; opacity: 1 !important; transform: none !important; }
+  *[class*="animate"], *[class*="motion"], .particles, .masonry-item { transition: none !important; animation: none !important; }
+}
+
+/* Paper / envelope styles */
+.paper-bg {
+  background-image: var(--paper);
+  box-shadow: 0 30px 60px rgba(11,8,7,0.12), inset 0 1px 0 rgba(255,255,255,0.6);
+  border: 1px solid rgba(183,110,121,0.06);
+}
+.envelope {
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,247,240,0.98));
+  border-radius: 10px;
+  box-shadow: 0 18px 40px rgba(11,8,7,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* subtle paper texture using svg data URI */
+.paper-bg {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><rect width='200' height='200' fill='%23fffaf1'/><g fill='%23f6efe6' opacity='0.12'><rect x='0' y='0' width='1' height='1'/></g></svg>"), var(--paper);
+  background-blend-mode: overlay;
+  /* subtle breathing ambient glow */
+  animation: ambientGlow 6s ease-in-out infinite;
+}
+
+@keyframes ambientGlow {
+  0% { box-shadow: 0 18px 40px rgba(11,8,7,0.06); }
+  50% { box-shadow: 0 28px 60px rgba(11,8,7,0.08); }
+  100% { box-shadow: 0 18px 40px rgba(11,8,7,0.06); }
+}
+
+/* performance: prefer transform for GPU acceleration */
+.masonry-item img { will-change: transform, opacity; }
+
+/* small helpers */
+.scrapbook-border img { display:block; }
+
