@@ -269,7 +269,7 @@ const OurStory = () => {
     { year: '2020', title: 'Beach Side Afternoons', description: "Long slow afternoons where we talked about small things and held on to the quiet." },
     { year: '2021', title: 'A Simple Promise', description: "An ordinary day that became extraordinary because you were by my side." },
     { year: '2022', title: 'Swimming Together', description: "Tiny moments of surprise that felt like the whole world had been planned for us." },
-    { year: '2023', title: 'Sunset Walks', description: "Walking hand in hand, watching colors change and time slow down." },
+    { year: '2023', title: 'Living Life', description: "Living life to the fullest, while creating memories that last a lifetime." },
     { year: '2024', title: 'Late Night Laughs', description: "When the world was quiet we found the loudest reasons to smile." },
     { year: '2025', title: 'Always', description: "Small promises, steady presence, and a thousand gentle memories." }
   ];
@@ -373,7 +373,7 @@ const Moments = ({ motionEnabled = true }: { motionEnabled?: boolean }) => {
             className="flex items-center gap-2 text-rose-gold border border-rose-gold px-6 py-3 rounded-full text-sm uppercase tracking-widest hover:bg-rose-gold hover:text-white transition-all duration-300"
             onClick={() => setSelected(photosToShow[0]?.src ?? null)}
           >
-            <Camera size={18} /> View All
+            <Camera size={18} /> Scroll Down
           </motion.button>
         </div>
 
